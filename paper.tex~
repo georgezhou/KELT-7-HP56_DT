@@ -1,0 +1,313 @@
+\documentclass[useAMS,usenatbib]{mn2e}
+
+%%%%% AUTHORS - PLACE YOUR OWN MACROS HERE %%%%%
+%\usepackage[T1]{fontenc}
+%\usepackage{aecompl}
+\usepackage{aas_macros}
+%\usepackage{deluxetable}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xspace}
+%\usepackage{array}
+%\usepackage{lineno}
+\usepackage{ifthen}
+%\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{placeins}
+%\usepackage{subcaption}
+%\usepackage{caption}
+\usepackage{longtable}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+{\renewcommand{\arraystretch}{1.4} %<- modify value to suit your needs
+
+\newcommand\T{\rule{0pt}{4ex}}       % Top strut
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+\newcommand{\titledag}{$\dagger$}
+\newcommand{\titlestar}{$\star$}
+\newcommand{\titlestarstar}{$\star\star$}
+
+\newcommand{\kms}{\mbox{km\,s$^{-1}$}\xspace}
+\newcommand{\teff}{$T_\text{eff}$\xspace}    
+\newcommand{\logg}{$\log g$\xspace}
+\newcommand{\feh}{[Fe/H]\xspace}
+\newcommand{\vmag}{$V_\text{mag}$\xspace}
+\newcommand{\chisq}{$\chi ^2$\xspace}
+\newcommand{\vsini}{$v \sin i_\text{rot}$\xspace}
+\newcommand{\iraf}{\footnote{IRAF is distributed by the National Optical Astronomy Observatories, which are operated by the Association of Universities for Research in Astronomy, Inc., under cooperative agreement with the National Science Foundation.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Doppler tomography with TRES]{Doppler tomography measurements for KELT-1b, KELT-7b, and HAT-P-56b}
+
+\author[G.~Zhou et al.]
+{\parbox{\textwidth}
+  {George Zhou$^{1}$\thanks{E-mail: \texttt{george.zhou@cfa.harvard.edu}},
+    David W. Latham$^{1}$,
+    Allyson Bieryla$^{1}$,
+    Thomas G. Beatty$^{2,3}$,
+    Lars A. Buchhave$^{4,1}$,
+    Gilbert A. Esquerdo$^{1}$,
+    Perry Berlind$^{1}$,
+    and Michael L. Calkins$^{1}$
+\vspace{0.4cm}}\\
+\parbox{\textwidth}{
+  $^{1}${Harvard-Smithsonian Center for Astrophysics, 60 Garden St., Cambridge, MA 02138, USA}\\
+  $^{2}${Department of Astronomy \& Astrophysics, The Pennsylvania State University, 525 Davey Lab, University Park, PA 16802, USA}\\
+  $^{3}${Center for Exoplanets and Habitable Worlds, The Pennsylvania State University, 525 Davey Lab, University Park, PA 16802, USA}\\
+  $^{4}${Centre for Star and Planet Formation, Natural History Museum of Denmark, University of Copenhagen, DK-1350 Copenhagen, Denmark}\\
+}}
+\begin{document}
+%\linenumbers
+
+\date{Accepted XXX.  Received XXX; in original form XXX}
+
+\pagerange{\pageref{firstpage}--\pageref{lastpage}} \pubyear{2016}
+
+\maketitle
+
+\label{firstpage}
+
+\begin{abstract}
+We present Doppler tomographic analyses for the spectroscopic transits of KELT-1b, KELT-7b, and HAT-P-56b, a hot brown-dwarf and two hot-Jupiters orbiting rapidly rotating F-dwarf host stars. These include analyses of archival TRES observations for KELT-1b and KELT-7b, and a new TRES transit observation of HAT-P-56b. We report a significant spin-orbit misalignment for KELT-1b of $|\lambda|=30_{-4}^{+3}\,^\circ$, and  spin-orbit aligned geometries for KELT-7b ($2.8_{-0.6}^{+0.6}\,^\circ$) and HAT-P-56b ($1_{-2}^{+4}\,^\circ$). Our measurement of spin-orbit misalignment for KELT-1b is in significant tension with the discovery paper, a discrepancy we attribute to the choice of the model used in the Rossiter-McLaughlin effect fit. The short orbital period and high mass ratio of KELT-1b makes its high obliquity particularly puzzling in the context of tidal theories. The host stars KELT-1, KELT-7, and HAT-P-56 are among some of the most rapidly rotating planet-hosting stars known. We examine the tidal re-alignment model for the evolution of the spin-orbit angle in the context of the spin rates of these stars. We find no evidence that the rotation rates of KELT-7 and HAT-P-56 have been modified by star-planet tidal interactions, suggesting that the spin-orbit angle of systems around these hot stars may represent their primordial configuration. In fact, KELT-7 and HAT-P-56 are two of three systems in super-synchronous, spin-orbit aligned states, where the rotation periods of the host stars are faster than the orbital periods of the planets.
+\end{abstract}
+
+\begin{keywords}
+Planetary systems — planets and satellites: individual (KELT-1b, KELT-7b, HAT-P-56b)
+\end{keywords}
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The observed population of hot-Jupiters is thought to have migrated inward after their formation. The angle between the spin axis of the star and the orbit normal of the hot-Jupiter is a useful probe for the migration history of the planet. In the most simple interpretation, planets found in well-aligned orbits are thought to have migrated in the protoplanetary disk via planet-gas interactions \citep[e.g.][]{1996Natur.380..606L}, while those found in high obliquity orbits underwent dynamical interactions, such as planet-planet scattering \citep[e.g.][]{1996Sci...274..954R}, Kozai-Lidov induced eccentricity migration \citep[e.g.][]{2003ApJ...589..605W,2007ApJ...669.1298F}, or were born in primordially tilted disks \citep[e.g.][]{2010MNRAS.401.1505B,2012Natur.491..418B}.  Of the 74 planets with  spin-orbit measurements\footnote{From the Rossiter-McLaughlin sample, a technique that does not impose strong selection biases on the spin-orbit orientation of the systems measured}, 23\% are found in misaligned orbits.
+
+However, interpreting the misalignment statistic is made harder by potential post-migration evolution of the orbit geometry. It is thought that star-planet interactions, such as tidal and magnetic drag, can realign the spin direction of the convective envelope of a host star \citep{2010ApJ...718L.145W,2012MNRAS.423..486L,2013ApJ...769L..10R,2014ApJ...784...66X,2014ApJ...790L..31D}. This is supported by the observed trend that massive planets in close-in orbits around cooler stars tend to be aligned, while smaller planets around hotter stars (which lack convective envelopes), or at longer periods (where tidal forces are weak), exhibit a wide range of obliquity angles \citep[e.g.][]{2010ApJ...718L.145W,2010ApJ...719..602S,2012ApJ...757...18A,2015ApJ...801....3M}.  It should be noted that this framework has some observational shortcomings. \citet{2015ApJ...801....3M} and \citet{2015arXiv151105570L} compared the photometric variability (a potential proxy for line-of-sight spin axis inclination) of planet-hosting stars to other stars of similar properties that do not host transiting hot-Jupiters. They found the stellar type -- spin-orbit angle trend persists at long periods, beyond the bounds of tidal interactions. In addition, short period planets around cool stars have been found in severe misalignment \citep{2010MNRAS.402L...1P,2015ApJ...814L..16Z}, these planets should have realigned the convective envelope of their stars under the tidal theory.
+
+Within this tidal realignment framework, we can postulate that the primordial spin-orbit angles of planets around early-type stars are more likely recoverable, especially those that exhibit rapid rotation and have not yet been spun-down by planet-star interactions. Unlike late-type stars that undergo magnetic braking, stars hotter than $T_\text{eff} \sim 6250\,\text{K}$ do not spin-down significantly, and are generally more rapidly rotating. One key problem with characterising planets around rapidly rotating, early type stars is that precise radial velocity measurements needed for the Rossiter-McLaughlin effect \citep{1924ApJ....60...15R,1924ApJ....60...22M} are difficult to obtain.
+
+In this study, we present Doppler tomographic analyses to measure the spin-orbit angles of three systems, orbiting rapidly rotating F-type stars. We present a new spectroscopic transit observation for the hot-Jupiter HAT-P-56b \citep{2015AJ....150...85H}, and a re-analysis of archival observations for the transits of the brown dwarf KELT-1b \citep{2012ApJ...761..123S} and the hot-Jupiter KELT-7b \citep{2015AJ....150...12B}. The key properties of these systems are presented in Table~\ref{tab:literature_properties}. They all orbit rapidly rotating F-dwarfs, with projected rotational velocities of $v\sin i=55$, $70$, and $38\,\text{km\,s}^{-1}$, respectively (see Section~\ref{sec:lsd}). Of all transiting hot-Jupiter hosts known, only the A-stars WASP-33 \citep{2010MNRAS.407..507C}, KOI-13 \citep{2014ApJ...790...30J}, and HAT-P-57 \citep{2015AJ....150..197H} have higher rotation rates.
+
+
+
+\begin{table*}
+  
+  \caption{\label{tab:literature_properties}Key properties of the KELT-1, KELT-7, and HAT-P-56 systems from the literature}
+  \begin{tabular}{lrrr}
+    \hline\hline
+    & \textbf{KELT-1} & \textbf{KELT-7} & \textbf{HAT-P-56}\\
+    Source & \citet{2012ApJ...761..123S} & \citet{2015AJ....150...12B} & \citet{2015AJ....150...85H}\\
+    \hline
+    RA & 00:01:26.9 & 05:13:11.0 & 06:45:24.0\\
+    DEC & +39:23:01  & +33:19:05 & +27:15:08\\
+    $V_\text{mag}$ & 10.70 & 8.54 & 10.91\\
+    $M_\star \, (M_\odot)$ & $1.324 \pm 0.026$ & $1.535_{-0.054}^{+0.066}$ & $1.296\pm0.036$ \\
+    $R_\star \, (R_\odot)$ & $1.462^{+0.037}_{-0.024}$  & $1.732_{-0.045}^{+0.043}$ & $1.428\pm0.030$\\
+    $T_\text{eff}\,(\text{K})$ & $6518\pm50$ &$6789_{-49}^{+50}$ & $6566\pm50$\\
+    $v\sin i\,(\text{km\,s}^{-1})$ & $56\pm2$ & $65.0_{-5.9}^{+6.0}$ & $40.06\pm0.50$\\
+    $M_p\,(M_\text{Jup})$ & $27.23^{+0.50}_{-0.48}$ & $1.28\pm0.18$ & $1.466\pm0.040$\\
+    $R_p\,(R_\text{Jup})$ & $1.110_{-0.022}^{+0.032}$ & $1.533_{-0.047}^{+0.046}$ & $2.18\pm0.25$\\
+    Period (days) & $ 1.217514\pm0.000015$ & $2.7347749\pm0.0000039$ & $2.7908327\pm0.0000047$\\
+    $|\lambda|\,(^\circ)$ &$ 2\pm16$ & $9.7\pm5.2$ & -\\
+    \hline
+  \end{tabular}
+\end{table*}
+
+The vast majority of known spin-orbit angles have been measured via the Rossiter-McLaughlin effect. When the planet transits the host star, it successively blocks out part of the rotating stellar surface, and thereby induces a net shift in the centroid of the stellar spectral lines, measured as an apparent in-transit radial velocity variation that is dependent on the transit geometry. The Rossiter-McLaughlin effect was observed for KELT-1b by \citet{2012ApJ...761..123S}, and for KELT-7b by \citet{2015AJ....150...12B}. Both systems were reported to be in prograde, spin-orbit aligned geometries. The spectral lines of rapidly rotating host stars are severely broadened by
+rotation, often resulting in blending of individual lines. It is often possible to directly measure the deviation in the rotational broadening kernel of the spectral lines induced by the transiting planet -- a technique known as Doppler tomography. The technique has already been employed to measure the spin-orbit angles of a number of planetary systems \citep{2010MNRAS.403..151C,2010MNRAS.407..507C,2010A&amp;A...523A..52M,2012ApJ...760..139B,2012A&amp;A...543L...5G,2013ApJ...771...11A,2014ApJ...790...30J,2015ApJ...810L..23J,2015AJ....150..197H}. This technique allows us to directly detect the Doppler shadow of the planet, providing a more accurate measurement of the spin-orbit angle, as well improved characterisation of other transit parameters. We present spin-orbit angles for KELT-1b, KELT-7b, and HAT-P-56b measured via the Doppler tomographic technique.
+
+\section{Spectroscopic observations and reductions}
+\label{sec:obs_and_analyses}
+
+\subsection{TRES transit spectroscopy observations}
+\label{sec:tres}
+
+Spectroscopic observations of the transits were obtained with the Tillinghast Reflector Echelle Spectrograph (TRES) on the 1.5\,m telescope at the Fred Lawrence Whipple Observatory, Mount Hopkins, Arizona, USA. The spectrograph has a resolving power of $\lambda / \Delta \lambda \equiv R = 44000$, sampling the spectral range of 3850-9100\,\AA\, over 51 echelle orders. We use the archival spectroscopic transit data of KELT-1b presented by \citet{2012ApJ...761..123S}. These observations were taken on 2012-01-07 UT. A total of 14 observations were obtained; each derived from sets of three exposures in order to optimize the removal of cosmic rays, with a total exposure time of 900\,s per observation. The set of spectra has an average signal-to-noise per resolution element of $\text{S/N} \sim 40$ in the Mg b line region. Wavelength calibration is achieved by bracketing Th-Ar hollow cathode lamp exposures.  The transit of KELT-7b was presented by \citet{2015AJ....150...12B}. The observation was performed on 2013-10-19 UT, a total of 29 spectra were observed, each with 900\,s exposure time made up of three exposures, achieving $\text{S/N} \sim 160$. The transit of HAT-P-56b was observed on 2016-01-03 UT, with a total of 30 spectra obtained. Similar to the KELT-1b and KELT-7b observations, each spectrum was combined from an average of three short exposures, with a total exposure time of 540\,s, achieving an average S/N of $\sim35$. Details of the spectral reduction and extraction can be found in \citet{2010ApJ...720.1118B}.
+
+\subsection{Retrieving the stellar broadening profile}
+\label{sec:lsd}
+
+Extracting the line profile from the spectra of rapidly rotating stars is complicated by the lack of unblended lines. We follow the technique set out in \citet{1997MNRAS.291..658D} and \citet{2010MNRAS.403..151C}, and perform a Least-Squares Deconvolution (LSD) to recover the line broadening kernel of each spectrum. This usually involves deconvolving the observed spectrum against a weighted delta-function line list to derive the broadening kernel of the star. Following \citet{2015AJ....150..197H}, we use unbroadened synthetic spectral templates, rather than weighted delta functions, as the template of the deconvolution. Synthetic spectral templates are generated using the spectral synthesis program SPECTRUM\footnote{\texttt{http://www1.appstate.edu/dept/physics/spectrum/spectrum.html}} \citep{1994AJ....107..742G}, with the ATLAS9 model atmospheres \citep{2004astro.ph..5087C}. We assume no rotation, microturbulence, macroturbulence, and instrumental broadening for the spectral template. 
+
+Each echelle order of the TRES spectrum is first blaze corrected and continuum normalised. We then derive broadening profiles for consecutive sections of the spectrum, each spanning three echelle orders $(\sim 200\,\text{\AA})$. A 20\% trapazium apodisation is applied to the observed spectrum and template to reduce the artefacts that are induced by the deconvolution. The broadening profiles from each section are average combined to form the final rotational profile for each exposure. A total of 34 echelle orders were used, spanning the spectral range 3900--6250\,\AA. This region was chosen to best avoid the telluric absorption lines. We found that deconvolutions of spectra stitched from three consecutive echelle orders yielded lower noise in the final rotational profile than either deconvolution of individual echelle orders, or deconvolution of the entire stitched spectrum. The $\sim 200\,$\AA\, long spectral regions contain enough information to allow an effective deconvolution, and are small enough that the sections can be weighted to arrive at the highest signal-to-noise averaged profile. The radial velocity shift of the star through the transit sequence, determined from the published orbit, is then subtracted, such that the centroid of each rotation kernel is shifted to $0\,\text{km\,s}^{-1}$.
+
+\subsection{Measuring $v\sin i$ from broadening profile}
+
+Spin-orbit angles derived from Doppler tomography and Rossiter-McLaughlin analyses are often degenerate with the rotational velocity of the star. We expect the broadening kernel to be dominated by the rotational broadening \citep[modelled analytically from][]{2005oasp.book.....G}, convolved with a Gaussian term that combines instrumental and macroturbulent broadening. The instrumental broadening of TRES is $6\,\text{km\,s}^{-1}$, while F-stars at $6500\,\text{K}$ to have a macroturbulence of $\sim 6\,\text{km\,s}^{-1}$ \citep{2014MNRAS.444.3592D}.
+
+To check if the $v\sin i$ can be accurately recovered from the combination of broadening factors, we generated a series of spectra with $v\sin i=50\,\text{km\,s}^{-1}$, macroturbulence of 0 to $10\,\text{km\,s}^{-1}$, and instrumental broadening of $6\,\text{km\,s}^{-1}$. These are deconvolved against an unbroadened template to derive broadening profiles for each test synthetic spectrum (Figure~\ref{fig:vmacro}). If the broadening kernels were fit with a simple rotation-only profile, then the resulting $v\sin i$ is systematically over-estimated. If we fit the broadening kernel with the convolution of a rotation and Gaussian term, then the $v\sin i$ can be recovered to within $0.2\,\text{km\,s}^{-1}$ (Figure~\ref{fig:vmacro}). 
+
+\begin{figure*}
+  \includegraphics[width=12cm]{plots/vmacro.eps}
+  \caption{\label{fig:vmacro} We test the influence of macroturbulence (vmacro) on the $v\sin i$ derived from LSD broadening kernels. A series of synthetic spectra are generated, with $v\sin i=50\,\text{km\,s}^{-1}$, and macroturbulence of 0 to $10\,\text{km\,s}^{-1}$. Their derived broadening kernels are plotted in the upper left panel. The upper right panel shows the derived $v\sin i$ of each kernel if only rotational broadening is accounted for. The $v\sin i$ is systematicly over-estimated if macroturbulence is non-zero. The bottom left panel shows that $v\sin i$ can be accurately recovered if we account for both rotational and macroturbulent broadening in the LSD profile fitting. The recovered macroturbulence values are plotted on the bottom right panel.}
+\end{figure*}
+
+A $v\sin i$ measurement is made for all available TRES out-of-transit spectra of each object. The median and standard deviation of the $v\sin i$ measurements is $53.4\pm0.9\,\text{km\,s}^{-1}$, $69.6\pm1.0\,\text{km\,s}^{-1}$, and $38.9\pm0.6\,\text{km\,s}^{-1}$ for KELT-1, KELT-7, and HAT-P-56 respectively  We also derive macroturbulence velocities of  $3.6\pm0.8\,\text{km\,s}^{-1}$, $4.1\pm0.8\,\text{km\,s}^{-1}$, and $5.7\pm1.4\,\text{km\,s}^{-1}$ for each star respectively. The $v\sin i$ we derive from the broadening profiles are generally consistent with those from the discovery papers ($56\pm2\,\text{km\,s}^{-1}$, $65_{-5.9}^{+6.0}\,\text{km\,s}^{-1}$, and $40.1\pm0.5\,\text{km\,s}^{-1}$), which are derived by maximising the cross correlation function over a series of template spectra.
+
+\section{Global modelling of the transit geometry}
+\label{sec:modelling}
+
+To derive the spin-orbit angle of the planets, we performed a global modelling of the Doppler tomographic and photometric transit datasets. Since the parameters, such as transit depth, shape, and duration, are shared among the photometric and Doppler tomographic observations, a global fit is required to properly constrain the transit parameters and propagate associated uncertainties.
+
+For KELT-1b, we included all the available photometric primary transit follow-up observations detailed in \citet{2012ApJ...761..123S}. These include the Peter van de Kamp Observatory 2011-12-03 $i$ band transit, University of Louisville Moore Observatory 2011-12-03 and 2011-12-31 $r$ band transits, Hereford Arizona Observatory 2011-12-10 $i$ band transit, and the FLWO KeplerCam 2011-12-16 and 2012-01-07 $i$ band transits.
+
+For KELT-7b, we included all the available photometric follow-up observations detailed in \citet{2015AJ....150...12B}. These included the University of Louisville Moore Observatory 2012-10-04 $g'$ band transit, FLWO KeplerCam 2012-10-23 $z'$, 2012-11-03 $z'$, 2013-11-22 $g'$, and 2013-10-19 $i'$ band transits, Bryne Observatory at Sedgwick 2012-11-14 $g'$ and 2014-01-13 $i'$ band transits, Canela's Robotic Observatory 2012-12-08 $V$, 2013-01-29 $i'$ band transits, and the Whitin Observatory at Wellesley College 2013-01-27 $i'$ band transit.
+
+For HAT-P-56b, we included the K2 long cadence light curve available for the target. The K2 light curve reduction and detrending process are described in \citet{2015AJ....150...85H} and \citet{2015MNRAS.454.4159H}. 
+
+The photometric transits were modelled as per \citet{2002ApJ...580L.171M}. Free parameters include the planet-star radius ratio $R_p/R_\star$, normalised orbital distance $a/R_\star$, orbital inclination inc, the transit centre time $T_0$, and period $P$. The quadratic limb darkening parameters for each band are interpolated from \citet{2000A&amp;A...363.1081C} to the atmospheric parameters of each star, and fixed during the global fitting. To account for the long-cadence nature of the HAT-P-56 K2 light curves, we integrated the model over 30-minutes about each time stamp at 10 evenly spaced points. To ensure the per-point photometric uncertainties are accurate, we also inflated the uncertainties such that the reduced $\chi^2$ is at unity when compared against the best fitting model. 
+
+To model the Doppler tomographic transit observations, we first created an averaged out-of-transit rotational profile. The `shadow' of the planet is modelled as a Gaussian intrusion to the average rotational profile at each time step. The Gaussian has width of $R_p/R_\star \times v\sin i$, area of $1-f(t)$ (where $f(t)$ is the flux, blocked by the planet, that makes up the transit light curve), centred about $v_p(t)$ (where $v_p(t)$ is the projected rotational velocity for the region of the star occulted by the planet). Given the low S/N of the signal, a Gaussian function is a quick and effective model for the Doppler shadow of the planet \citep[e.g.][]{2016arXiv160200322C}. The parameter $v_p(t)$ is dependent on the spin-orbit angle $|\lambda|$, and the projected rotational velocity of the star $v \sin i$. As instrumental systematics can induce variations to the rotational profile at each time step, at each fitting iteration we also fit for a dilation in the height and width of the rotational profile. An example of the rotational profile fitting, and the Doppler shadow of the planet, are shown in Figure~\ref{fig:vprof_KELT7} (Top). The flux blocked by the planet directly correlates with the area of the Doppler shadow, and we also constructed a transit light curve directly from the Doppler tomographic signal (Figure~\ref{fig:vprof_KELT7} Bottom).
+
+\begin{figure}
+  \begin{tabular}{c}
+  \includegraphics[width=8cm]{plots/KELT-7/vprof.eps}\\
+  \includegraphics[width=8cm]{plots/KELT-7/lc_ccfprofile.pkl.eps}
+  \end{tabular}
+  \caption{\label{fig:vprof_KELT7}Top: Broadening kernels derived from a sample of five consecutive exposures during the transit of KELT-7b. The broadening kernel from each exposure is marked by the grey points. The average out-of-transit broadening kernel is marked by the blue lines. Models generated from a set of 100 randomly selected steps in the converged MCMC chain are plotted in red. The residual for each exposure from the average out-of-transit profile is shown below. The Doppler shadow of the planet can be seen in the residuals. Bottom: Measuring the area of the Doppler shadow is equivalent to measuring a transit light curve. The transit light curve of KELT-7b, directly measured from the Doppler tomographic signal, is plotted. }
+\end{figure}
+
+The per point uncertainties in the rotational profile residuals were estimated by taking the standard deviation of the baseline regions of the rotational profile. We accountted for correlated noise in the broadening kernel via a Gaussian Processes approach \citep[e.g.][]{2015AJ....150..197H}. Applications of Gaussian process regression to astronomical signals have been extensively covered in the literature and shown to reliably retrieve model parameters from data-sets influenced by stochastic noise sources \citep[e.g.][]{2012MNRAS.419.2683G,2014MNRAS.445.3401G}. The Gaussian process regression was modelled with the \emph{George} module \citep{2014arXiv1403.6015A}. We employed a radial exponential kernel to model the co-variance $\Sigma_{ij}$ between points $i$, $j$, with velocities $v_{i}$ and $v_{j}$:
+\begin{equation}
+  \Sigma_{ij} = \sigma_{i}^2 \delta_{ij} + A \exp \left(- \frac{|v_{i}-v_{j}|}{\tau} \right)\,,
+\end{equation}
+where $\sigma_{i}$ is the per-point uncertainty for point $i$, and $\delta_{ij}$ is the Kronecker delta function.
+
+
+We explored the parameter space with a Markov chain Monte Carlo (MCMC) analysis, using the \emph{emcee} implementation \citep{2013PASP..125..306F} of an affine-invariant ensemble sampler. The transit parameters are also constrained by the spectroscopic stellar parameters for each star. At each iteration, we calculate an expected $a/R_\star$ using the orbital period, stellar mass and radii expected for the spectroscopic $T_\text{eff}$, $\log g$, [Fe/H] of the spectrum. The stellar mass and radius are interpolated from the spectroscopic parameters via the \citet{2010A&amp;ARv..18...67T} relationships. The expected $a/R_\star$ is then compared to the tested $a/R_\star$, thereby constraining the fit. The spectroscopic $v \sin i$ measurement and uncertaintiy from Section~\ref{sec:lsd} is applied to the fit as Gaussian prior. Gaussian priors were also imposed on the transit centre $T_0$ and period $P$, since these were derived in the discovery papers from the discovery and follow-up light curves, and are therefore much better constrained than from follow-up light curves alone. Uniform priors were assumed for all other parameters, including the hyper-parameters of the Gaussian process regression. 
+
+The derived values and uncertainties are shown in Table~\ref{tab:parameters}. The Doppler tomographic signals, from the rotational profile fit to each TRES exposure, are shown in Figure~\ref{fig:dopplergram}. 
+
+\begin{table*}
+  
+  \caption{\label{tab:parameters}Derived transit geometry parameters}
+  \begin{tabular}{lrrr}
+    \hline\hline
+    & \textbf{KELT-1b} & \textbf{KELT-7b} & \textbf{HAT-P-56b}\\
+    \hline
+    Period (days) & $1.21750_{-0.00002}^{+0.00002}$ & $2.734780_{-0.000003}^{+0.000003}$ & $2.790832_{-0.000003}^{+0.000003}$ \\
+    $T_0$ (BJD) & $2455909.2932_{-0.0003}^{+0.0003} $ & $2456355.2292_{-0.0001}^{+0.0001}$ & $2456553.6165_{-0.0003}^{+0.0003}$ \\
+    $R_p/R_\star$ & $0.0771_{-0.0006}^{+0.0006}$ & $0.0924_{-0.0004}^{+0.0004}$ & $0.095_{-0.01}^{+0.02}$ \\
+    $a/R_\star$ & $3.69_{-0.02}^{+0.01}$ & $5.41_{-0.07}^{+0.08}$ &  $7.8_{-0.5}^{+0.4}$ \\
+    $\text{inc}\,(^\circ)$ & $90.3_{-0.5}^{+0.5}$ & $83.5_{-0.2}^{+0.3}$ & $84.1_{-0.7}^{+0.5}$\\
+    $|\lambda|\,(^\circ)$ & $30_{-4}^{+3} $ & $2.8_{-0.6}^{+0.6}$ & $1_{-2}^{+4}$\\
+    $v\sin i\,(\text{km\,s}^{-1})$ & $54.1_{-0.9}^{+0.9}$ & $70.4_{-0.6}^{+0.6}$ & $38.0_{-0.3}^{+0.3}$\\
+    $\ln(A)$ & $-8.43_{-0.05}^{+0.05}$ & $-8.84_{-0.05}^{+0.05}$ & $-7.52_{-0.04}^{+0.04}$ \\
+    $\ln(\tau)$ & $2.4_{-0.1}^{+0.1}$ & $3.9_{-0.1}^{+0.1}$ & $2.28_{-0.09}^{+0.08}$\\
+    $T_\mathrm{eff}$ (K) & $6507_{-52}^{+49}$ & $6514_{-49}^{+49}$& $6568_{-53}^{+48}$\\
+    $\log g$ & $4.24_{-0.03}^{+0.03}$ & $4.13_{-0.03}^{+0.03}$& $4.24_{-0.06}^{+0.05}$\\
+    \hline
+  \end{tabular}
+\end{table*}
+
+\begin{figure*}
+  \begin{tabular}{ccc}
+    \includegraphics[width=5cm]{plots/KELT-1/ccfprofile.pkl.eps} &
+    \includegraphics[width=5cm]{plots/KELT-7/ccfprofile.pkl.eps} &
+    \includegraphics[width=5cm]{plots/HATP56/dopplergram.eps} \\
+  \end{tabular}
+  
+  \caption{\label{fig:dopplergram}The Doppler tomographic signal for KELT-1b (left), KELT-7b (centre), and HAT-P-56b (right) from the TRES observations. The top panels show the signal induced by the planet in the residual between each broadening kernel and the averaged out-of-transit kernel. The middle panels show the model of the best fit geometry. The bottom panels show the residual after the model is subtracted. }
+\end{figure*}
+
+To test the dependence of our results on choice of Gaussian process co-variance kernel, we also tested an exponential squared kernel:
+\begin{equation}
+  \Sigma_{ij} = \sigma_{i}^2 \delta_{ij} + A \exp \left(- \frac{(v_{i}-v_{j})^2}{2\tau} \right)\,,
+\end{equation}
+yielding $|\lambda| = 28_{-7}^{+4}\,^\circ$  for KELT-1b, $|\lambda| = 2.6_{-0.6}^{+0.6}\,^\circ$ for KELT-7b, and $|\lambda| = 8_{-4}^{+3}\,^\circ$ for HAT-P-56b.
+Using the Matern 3/2 kernel:
+\begin{equation}
+  \Sigma_{ij} = \sigma_{i}^2 \delta_{ij} + A \left( 1+\sqrt{\frac{3(v_{i}-v_{j})^2}{\tau}} \right) \exp \left(-\sqrt{\frac{3 (v_{i}-v_{j})^2}{\tau}}\right)\,,
+\end{equation}
+yields $|\lambda| = 28_{-8}^{+4}\,^\circ$ for KELT-1b, $|\lambda| = 2.7_{-0.6}^{+0.7}\,^\circ$ for KELT-7b, and $|\lambda| = 7_{-6}^{+4}\,^\circ$ for HAT-P-56b. In each case, the Gaussian process hyper-parameters converged to a solution without the need to apply priors.  To check for the effect of accounting for stochastic noise via Gaussian process, we also modelled the Doppler tomographic observations without allowing for co-variance between points, and derived similar results, but with smaller uncertainties, of $|\lambda|$ of $30_{-2}^{+2}\,^\circ$ for KELT-1b, $|\lambda|$ of $2.1_{-0.4}^{+0.3}\,^\circ$ for KELT-7b, and $4_{1}^{+2}\,^\circ$ for HAT-P-56b.
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+We found a misalignment in the spin-orbit geometry of KELT-1b at $30_{-4}^{+3}\,^\circ$, while KELT-7b, and HAT-P-56b were both found to be well aligned, with $|\lambda|$ of $2.8_{-0.6}^{+0.6}\,^\circ$ and $1_{-2}^{+4}\,^\circ$.
+
+The transit parameters we derived for KELT-7b and HAT-P-56b are in general agreement with those in the discovery papers. KELT-7b is confirmed to be in a  spin-orbit aligned geometry, in agreement with the Rossiter-McLaughlin analysis in \citet{2015AJ....150...12B}. In fact, \citet{2015AJ....150...12B} were able to detect the shadow of the planet in the cross correlation function of the spectra. Because of the grazing nature of the transit of HAT-P-56b, the uncertainties in its transit parameters are larger than the other systems. The $a/R_\star$ value we derive for the HAT-P-56 system ($7.8_{-0.4}^{+0.5}$) is in slight disagreement with that in \citet{2015AJ....150...85H} ($6.37\pm0.11$ and $3.402\pm0.055$). There is a strong correlation between $a/R_\star$ and inclination for a near-grazing transiting system. Since the Doppler tomographic observation helps to constrain the inclination of the system, we chose to adopt our transit parameters for the planet. The difference in the best fit geometry also led to a slight modification of $R_p/R_\star$, where we derived $0.095_{-0.01}^{+0.02}$, in contrast to the value reported in the discovery paper of $0.1054\pm0.0009$. 
+
+The Doppler tomographic spin-orbit angle measured for KELT-1b is significantly different from that presented in \citep{2012ApJ...761..123S}. To understand this discrepancy, we re-analyse the in-transit velocities below. 
+
+\subsection{Re-analysis of the Rossiter-McLaughlin effect for KELT-1b}
+\label{sec:KELT-1_RM}
+
+The transit impact parameter of KELT-1b is within $2\sigma$ of 0. As such the Rossiter-McLaughlin model is symmetric about the transit centre, and the amplitude is highly dependent on the $v \sin i$ prior and the model prescription employed. A low impact parameter Rossiter-McLaughlin effect can be severely affected by modelling biases \citep[e.g.][]{2011ApJ...738...50A,2012ApJ...757...18A}.  For example, \citet{2012ApJ...761..123S} employs the \citet{2005ApJ...622.1118O} Rossiter-McLaughlin model, which computes the mean velocity of the rotating stellar disk during the transit. This approach is slightly different from the actual measured quantity -- the cross correlation function centroid, which modifies the Rossiter-McLaughlin model shape due to various factors of line broadening \citep[see descriptions in ][]{2013A&amp;A...550A..53B,2011ApJ...742...69H}. Figure~\ref{fig:RM_KELT1} shows the Rossiter-McLaughlin models for KELT-1b computed via the mean velocity \citep[using the \emph{ARoME} library]{2013A&amp;A...550A..53B} and according to a cross correlation function centorid approach \citep{2011ApJ...742...69H}.
+
+We performed a global fit of the KELT-1 system, including the Rossiter-McLaughlin effect, transit light curves, and orbital radial velocities. We incorporated light curve detrending parameters in the global fit, such that the light curves are simultaneously detrended. The model fitting process is largely similar to that described in \citet{2015ApJ...814L..16Z}. Modelling the Rossiter-McLaughlin effect according to \citet{2011ApJ...742...69H} yielded $|\lambda| = 66_{-6}^{+5} \, ^\circ$, $v \sin i = 56\pm2 \,\text{km\,s}^{-1}$, and impact parameter $b=0.00_{-0.05}^{+0.06}$. In contrast, modelling the Rossiter-McLaughlin effect according to the mean velocity, similar to that of \citet{2005ApJ...622.1118O}, yielded $|\lambda| = 14_{-13}^{+18}\, ^\circ$, $v \sin i = 56\pm2 \,\text{km\,s}^{-1}$, and $b=0.0_{-0.2}^{+0.2}$ \citep[consistent with the results presented in ][]{2012ApJ...761..123S}. %In addition, if we allow a quadratic baseline to the velocities on the night to account for any airmass induced velocity trends \citep[e.g.][]{2010ApJ...722L.224B},
+
+
+\begin{figure}
+  \begin{tabular}{c}
+  \includegraphics[width=8cm]{plots/KELT-1/RM_vmean.eps}\\
+  \includegraphics[width=8cm]{plots/KELT-1/RM_hirano.eps}
+  \end{tabular}
+  \caption{\label{fig:RM_KELT1}The Rossiter-McLaughlin effect of KELT-1b, as modelled by (top) taking the mean velocity of the occulted stellar disk (similar to the \citet{2005ApJ...622.1118O} model used in the discovery paper analysis), and (bottom) modelled according to \citet{2011ApJ...742...69H}. In each case, the models for a series of $\lambda$ angles are plotted as a guide. Since the impact parameter of the transit is nearly 0, the $\lambda$ value derived from the Rossiter-McLaughlin effect is highly dependent on the model choice. }
+\end{figure}
+
+We also performed a similar analysis for the Rossiter-McLaughlin effect of KELT-7b, and found a spin-orbit alignment geometry regardless of the model used. Since KELT-7b transits at a high impact parameter $(0.60_{-0.03}^{+0.02})$, a misalignment induces an asymmetry in the Rossiter-McLaughlin effect, mitigating the dengeneracies we see in the KELT-1b system. 
+
+Luckily, the degeneracies of the Doppler tomography technique are more trivial. While a strong $v \sin i$ prior is required for the Doppler tomographic modelling, $v\sin i$ is directly measured from the broadening profile for rapidly rotating stars. Other degeneracies, such as that between $a/R_\star$ and inclination, are no different from those encountered in the standard transit light curve modelling. In fact, the impact parameter is better constrained by the Doppler tomographic measurement, and is sharply related to the deviation from 0 velocity of the planet's trail at transit centre. 
+
+\subsection{The spin-orbit angle distribution of hot-Jupiters around F-type stars}
+\label{sec:stats}
+
+A total of 6 systems around stars with $T_\text{eff} > 6250\,\text{K}$ have now been found in spin-orbit alignment $(|\lambda| < 10^\circ)$, while 16 have higher obliquities.
+
+Have these systems undergone tidal synchronisation and realignment? The characteristic timescale for stellar spin sychronisation is given by \citet{2010ApJ...723..285H} and \citet{2012ApJ...757....6H}, who reviewed the tidal theory in the context of hot-Jupiter systems. Adopting Equation 3 in \citet{2010ApJ...723..285H}, the characteristic timescale to modify the spin of the host star, $T_\text{spin}$, is:
+\begin{align}
+  T_\text{spin} =& \frac{3.1\times10^9\,\text{years}}{(1-e^2)^{1/2}} \left(\frac{a}{0.02 \,\text{AU}} \right)^{7.5} \left( \frac{R_\star}{R_\odot}\right)^{-8} \left( \frac{k_0^2}{0.1} \right) \notag\\
+  &\times \left( \frac{30 \,\text{days}}{P_\text{rot}} \right) \left(\frac{M_\star + M_p}{M_\odot} \right)^{1/2} \left(\frac{M_p}{M_\text{Jup}} \right)^{-2} \notag\\
+  &\times \left( \frac{\sigma_\star}{7.8\times10^{-8}} \right)^{-1}\,.
+\end{align}
+We assume a stellar gyration radius of $k_0=0.1\,R_\star$, stellar dissipation coefficients $\sigma_\star$ of $10^{-12}$ for KELT-7, and $10^{-8}$ for KELT-1 and HAT-P-56. The expected $T_\text{spin}$ is $\sim 10^{7}$ years for KELT-1, $\sim 10^{15}$ years for KELT-7, and $10^{11}$ years for HAT-P-56b. That is, while the KELT-1 system is expected to have reached tidal realignment, tidal dissipation in the stellar envelope is expected to be weak for KELT-7 and HAT-P-56, at least based on standard equilibrium tide models. In fact, tidal interactions are expected to be weak for all the spin-orbit aligned hot-Jupiters around F-dwarfs.
+
+Given the large mass ratio and short orbital period, tidal effects should be very important for the KELT-1b system, and the new misaligned $\lambda$ measurement is extra puzzling as a result. \citet{2012ApJ...761..123S} calculated an orbital decay timescale of 0.3 Gyr for the system, significantly shorter than the age of the system. Considering the many challenges of tidal theories, KELT-1 presents an interesting case to study the tidal interactions of a close-in brown dwarf, perhaps the tidal interactions for this system are simply weaker than we expect. \citet{2012ApJ...761..123S} also noted a faint companion $558\pm1$ mas from KELT-1. If physically bound to KELT-1, it may incite Kozai-Lidov oscillations that resulted in the high eccentricity migration of the brown dwarf, and explain the original high obliquity of the system. 
+
+KELT-7b and HAT-P-56b were found to be in projected spin-orbit alignment. If we assume alignment in the line-of-sight of the stellar spin axis as well, we can examine the spin-orbit coupling of these systems. The spins of KELT-7 and HAT-P-56 are both super-synchronous with respect to the orbital period of the planet. The maximum rotation period for KELT-7 is $1.08\pm0.03$ days, and $1.8\pm0.2$ days for HAT-P-56, based on the spectroscopic $v \sin i$ measurements. From the K2 light curves, \citet{2015AJ....150...85H} found that HAT-P-56 is a possible $\gamma$ Dor pulsator with a primary pulsation period of $1.64\pm0.03$ days, and a secondary peak in the periodogram of $1.74\pm0.02$ days that is consistent with the $v\sin i$ derived rotation period. Neither the KELT discovery light curves, nor the archival SuperWASP light curves \citep{2010A&amp;A...520L..10B} yielded a photometric modulation period for KELT-7 in our analysis.  For comparison, \citet{2013MNRAS.436.1883W} found that \emph{Kepler} systems with planets of $R_p > 6 \,R_\text{E}$ and $\text{Period}<10$\,days are preferentially found in the stellar-spin -- planet-orbit synchronised states. 
+
+%KELT-1 is spin-orbit synchronised, with an expected rotation period of $1.10_{-0.03}^{+0.09}$\,days from the projected rotational velocity. This is expected given the close-in orbit of the brown dwarf. 
+
+Along with the CoRoT-11 system \citep{2010A&amp;A...524A..55G,2012A&amp;A...543L...5G}, KELT-7 and HAT-P-56 are the only spin-orbit aligned super-synchronous systems with planetary orbital periods $<5$\,days. Figure~\ref{fig:porb_prot} shows the orbital period $P_\text{orb}$ of spin-orbit aligned systems against their stellar rotation period $P_\text{rot}$. With the exception of the Kepler candidates from \citet{2013MNRAS.436.1883W}, the $P_\text{rot}$ values are derived from the spectroscopic $v\sin i$ measurements, which should be representative of the stellar spin period if we assume these systems are truly aligned. The only close-in systems in super-synchronous states are found around F-dwarfs. For these aligned super-synchronous systems, the angular momentum exchange between the star and the planet is expected to slow down the rotation of the star, and extend the orbital period of the planet. However, the timescale for tides to modify the orbital period is similar to that of the stellar spin synchronisation timescales \citep{2012ApJ...757....6H} for KELT-7 and HAT-P-56, and should not have affected the orbital periods of the planets. We note that a number of other spin-orbit misaligned systems are also found in super-synchronous states (CoRoT-3b, KELT-1b, KOI-13b, WASP-7b, WASP-8b, WASP-33b, WASP-38b). 
+
+\begin{figure*}
+  \includegraphics[width=14cm]{plots/Porb_Prot.eps}
+  \caption{\label{fig:porb_prot}The orbital periods $P_\text{orb}$ and stellar rotation periods $P_\text{rot}$ of close-in hot-Jupiter systems in spin-orbit alignment $(|\lambda| < 10^\circ)$. The solid line marks 1:1 spin-orbit synchronisation. KELT-7 and HAT-P-56 are super-synchronous with respect to the orbital period of their planets. The rotation of Kepler candidates were derived by \citet{2013MNRAS.436.1883W} from their light curves. Otherwise, the spin rotation periods are derived from the spectroscopic $v\sin i$, assuming $i=90^\circ$. These represent the upper limit of the rotational periods. Super-synchronous rotation is only found in systems with host stars of $T_\text{eff}>6250\,\text{K}$. We note that one of the $|\lambda|$ solutions for HAT-P-57b is of low obliquity and super-synchronous, but given the ambiguity that multiple $|\lambda|$ values are allowed \citep{2015AJ....150..197H}, it is left off the plot.}
+\end{figure*}
+
+To further check for tidal evolution of the stellar spin, we can also compare the derived rotation periods of F-stars hosting large transiting planets against a similar sample without transiting hot-Jupiters. Figure~\ref{fig:prot_hist} shows the distribution of rotation periods for host stars with $T_\text{eff}>6250\,\text{K}$, binned into aligned $(|\lambda| < 10^\circ)$ and misaligned groups. We also show the rotation period distribution for equivalent stars from the Kepler sample \citep{2013A&amp;A...557L..10N}. A two-sample Kolmogorov-Smirnov test cannot distinguish between the rotation period of the Kepler F-dwarf sample against that of F-dwarfs hosting spin-orbit aligned systems $(p=0.9\pm0.1)$. However, we can reject the null hypothesis that the rotation periods of the misaligned sample originated from the same population as the Kepler F-dwarfs with a high probability $(p=0.013\pm0.0006)$. This is expected given these systems are already known to have misaligned $|\lambda|$ angles, and are likely to have line-of-sight $(i)$ misalignments too. The uncertainties are derived by a Monte Carlo exercise, drawing the rotation period of each star from a Gaussian distribution with the standard deviation as their respective uncertainties. This suggests that 1) there is no evidence that the rotation periods of hot stars hosting spin-orbit aligned planets have being modified by tidal interactions, 2) the systems with low projected obliquities are likely to have low true obliquities too. We note that this analysis suffers from an observational selection bias against rapidly rotating stars. Planets found against rapid rotators are difficult to confirm, and therefore lacking in the literature. The same analysis on planets orbiting cool stars $(T_\text{eff}<6250\,\text{K})$ could not distinguish between any of the populations, since these cools stars are spun-down with age, and do not exhibit a sharp rotation period distribution.
+
+\begin{figure}
+  \includegraphics[width=8cm]{plots/prot_hist.eps}
+  
+  \caption{\label{fig:prot_hist}The distribution of stellar rotation periods for systems orbiting hot stars $(T_\text{eff}>6250\,\text{K})$. The rotation periods are measured from their spectroscopic $v\sin i$, assuming $i=90^\circ$. The top panel shows the distribution for well-aligned systems, middle panel shows systems with misalignment in $|\lambda|$. The bottom panel shows the distribution for the rotation periods for stars of the equivalent spectral type measured from Kepler photometry by \citet{2013A&amp;A...557L..10N}}
+\end{figure}
+
+Given the lack of evidence for tidal evolution in the rotation periods of most hot host stars, we can examine the set of spin-orbit angles for these systems around hot stars in the context of migration mechanisms. 23\% of the systems around hot stars are found in spin-orbit aligned arrangements. While the fraction of aligned systems is significantly lower than that of the overall distribution, it is still different from the relatively even $\lambda$ distribution expected from dynamical interactions such as eccentric migration via stellar binary Kozai-Lidov cycles \citep[e.g.][]{2012ApJ...754L..36N,2015ApJ...799...27P} or planet-planet scattering \citep[e.g.][]{2011ApJ...742...72N}. Nevertheless, dynamical interactions, compared to in-disk co-planar migration, are likely responsible for a significant fraction of hot-Jupiters around hot stars. It should be noted that inhomogenieity of the star-forming cloud, or binary-induced disk tilting, will also cause primordial spin-orbit misalignment \citep{2010MNRAS.401.1505B,2012Natur.491..418B}. We also note \citet{2012ApJ...758L...6R} suggest that internal gravity waves at the convective core -- radiative envelope boundary can induce arbitary surface spins for hot stars, independent of star-planet interactions.
+
+
+\section*{Acknowledgements}
+\label{sec:acknowledgements}
+GZ thanks Jason Eastman for his insightful comments regarding spin-orbit alignment of KELT-1b. GZ thanks Chelsea Huang for HAT-P-56b K2 light curves. The modelling in this paper was performed on the Smithsonian Institution High Performance Cluster (SI/HPC). We also thank Jessica Mink for running the TRES pipeline and maintaining the TRES archive. We acknowledge Andrew H. Szentgyorgyi, Gabor F\H{u}r\'{e}sz, and John Geary, who played major roles in the development of the TRES instrument. 
+
+
+
+
+
+\bibliographystyle{mn2e}
+
+\bibliography{mybibfile.bib}
+
+%\FloatBarrier
+
+\label{lastpage}
+
+
+\end{document}
