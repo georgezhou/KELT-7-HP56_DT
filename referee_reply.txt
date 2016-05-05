@@ -1,0 +1,59 @@
+We thank the referee again for the careful comments and suggestions. Please find below our replies to each comment. The editions made to the manuscript have also been made bold for ease of change tracking.
+
+>> 1) I appreciate that these changes are minor, and will have had little impact on the functionality of the pipeline. However, I think a single sentence to state that it was optimized or modified to work with TrES data is warranted.
+
+We have noted the minor changes to the pipeline below as follows:
+
+“Details of the spectral reduction and extraction can be found in Buchhave et al. (2010).”
+->
+“Details of the spectral reduction and extraction is similar to that described in Buchhave et al. (2010) for FIES observations. The pipeline was modified to work with the TRES spectrograph. All the parameters pertaining to the detector and spectrograph were modified, like the CCD format including overscan regions, the gain and readout noise, an initial guess for the position of the ThAr lines. Furthermore, tweaks were made for the handling of 3D cosmic ray removal, 3D profiling to remove pixel-to-pixel variations. However, these modifications are mostly minor changes and the bulk of the pipeline did not need major modifications to work with TRES.”
+
+>> 2) [Regarding the dependence between the assumed template and the measured vsini] I find this last point particularly interesting, and one that might warrant further investigation in the future; for this work, however, I think that is unnecessary. I would like to see a reference to the fact that this was the case in the manuscript though.
+
+To clarify, our previous response: “We found that the derived vsini is significantly dependent on the assumed template, a systematic that we correct for.” referred to the broadening applied to the template, not the Teff, logg, [Fe/H] of the template. That is, the vsini is overestimated when we use a template that does not account for macroturbulence and instrumental broadening.
+
+The following sentence has been appended to the end of paragraph 2, Section 2.3.
+
+"From these tests, we also note that the vsini measurement can be overestimated when we use a template that does not account for macroturbulence and instrumental broadening. "
+
+>> 3) [Regarding testing the assumption of incorrect stellar parameters to the our final result] Again, I find this last point quite valuable, as it demonstrates the robustness of the authors’ MCMC analysis. I think this is valuable information to add to the relevant discussion in the manuscript.
+
+The following paragraph has been added to the end of Section 3 to describe the influence of incorrect stellar parameters on our results.
+
+“To test the effect of a systematic offset in the assumed stellar parameters on our final result, we deconvolved the KELT-7 spectra against a 7000K template,  and modelled this new set of broadening profiles in our global MCMC analysis, whilst imposing a stellar parameter Gaussian prior of Teff=7000K, logg=4.2 for the MCMC jump parameters. We arrive at the same set of planet parameters, with no significant change in the best fit values or uncertainties.”
+
+
+>> 5) I would like to see the hyper-parameters specified as such, as unless I have missed it in my reading of the manuscript, this is not done.
+
+We have now appended this definition beneath equation 1). 
+
+“The Gaussian process hyper-parameters A and tau specify the amplitude and the scale length of the covariance between the velocity points, respectively.”
+
+We have also appended the following footnote to Table 2 to clarify the A and tau variables
+
+^c Gaussian process hyper-parameters A and tau describe the amplitude and the scale length of the covariance between velocity points in the broadening profile modelling.
+
+
+>> 6) [Regarding MCMC walker parameters listed in Table 2] Again, I would like to see it specified in the table caption that these are the walker parameters. I appreciate the indication as to the use of priors.
+
+We have changed the caption of Table 2 to
+
+“Derived transit geometry parameters”
+->
+“Derived values for MCMC walker parameters”
+
+>> 7) [Regarding the comparison between our target vsinis and rotation rates of Kepler stars] These are valuable comparisons that I would to see added to the text.
+
+The following sentences have been appended to the end of Paragraph 3, Section 4.1.
+
+“For a consistency check on the assumption that these two systems are also in line-of-sight alignment, we compare the vsini of these stars to that expected from the rotation periods of Kepler stars of similar stellar parameters Nielson et al. (2013). For F-dwarfs like KELT-7 (6600 < Teff < 6800), 68% of stars have rotation periods that lie within 1.2 -- 5.9 days. The vsini-derived rotation period of the KELT-7 is 1.08 days, consistent with the population, and with an aligned geometry. For stars like HAT-P-56 (6400 < Teff < 6600), 68% of stars lie within rotation periods of 1.4 -- 8.6 days. The rotation period of HAT-P-56 from vsini is 1.8 days, again consistent with the distribution, and with alignment.”
+
+>> 8) [ Regarding the potential pulsation signal seen in the Doppler tomographic observation of KELT-7] If this is a real signal then it warrants a mention in the text, particularly if it is not present in the photometry (although I note that none of the photometry is simultaneous with the spectroscopic transit observations). I am not requesting detailed analysis of the signal, but to those practiced at examining Dopplergrams it is obvious, and the lack of any reference to it is equally so. Some reference, and a brief discussion, is thus warranted in my opinion.
+
+We have added the following sentence to Section 4, making note of the pulsation signal.
+
+“We also note a weak stellar pulsation signal is seen in the Doppler tomographic analysis of KELT-7, manifested as diagonal stripes in Figure 3. Pulsations were not detected in the discovery KELT light curves of the star, but their presence is not surprising given the star lies close to the instability strip. Similar pulsations are also seen in the Doppler tomographic observations of WASP-33b (Collier Cameron et al. 2010b, Johnson et al. 2015) and HAT-P-57b (Hartman et al. 2015). “
+
+
+
+
